@@ -7,6 +7,8 @@ var gpio4;
 
 function trap() { 
   if (buttonPressed()) {
+    console.log('Toggling');
+
     if (toggled)
       gpio4.set();
     else
@@ -21,13 +23,14 @@ function buttonPressed() {
 }
 
 function start() {
-  console.log('Initializing')
+  console.log('Initializing');
 
   gpio4 = gpio.export(4, 
                       { 
                         direction: 'out', 
                         ready: function() {
-                          console.log('Starting')
+                          console.log('Starting');
+
                           setInterval(trap, CHECK_EVERY_MILLISECONDS);  
                         } 
                       });
