@@ -24,14 +24,12 @@ function loopEvery(loopFn, timeoutMilliseconds) {
 }
 
 function init() {
-  console.log('Initializing')
 
   var gpio11 = gpio.export(11, { direction: 'out' });
 }
 
 
-init(function(){
-  console.log('Starting')
-
-  loopEvery(trap, timeoutMilliseconds);
-});
+console.log('Initializing')
+init();
+console.log('Starting')
+loopEvery(trap, timeoutMilliseconds);
