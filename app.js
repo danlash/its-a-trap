@@ -2,15 +2,17 @@ var CHECK_EVERY_MILLISECONDS = 1000;
 
 var gpio = require('gpio');
 
-var buttonToggled = false;
+var toggled = false;
 var gpio11;
 
 function trap() { 
   if (buttonPressed()) {
-    if (gpio11.value === 0)
+    if (toggled)
       gpio11.set();
     else
       gpio11.set(0);
+
+    toggled = !toggled;
   }
 }
 
