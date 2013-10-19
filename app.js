@@ -8,7 +8,7 @@ var gpio4;
 function trap() { 
   if (buttonPressed()) {
     if (toggled)
-      gpio4`.set();
+      gpio4.set();
     else
       gpio4.set(0);
 
@@ -20,20 +20,18 @@ function buttonPressed() {
   return true;
 }
 
-function loopEvery(loopFn, timeoutMilliseconds) {
-  var looper = function() { loopFn(); setTimeout(looper, timeoutMilliseconds); };
-  looper();
-}
-
-function init(done) {
+function start() {
   console.log('Initializing')
 
-  var gpio4 = gpio.export(4, { direction: 'out', ready: done });
+  gpio4 = gpio.export(4, 
+                      { 
+                        direction: 'out', 
+                        ready: function() {
+                          console.log('Starting')
+                          setInterval(trap, CHECK_EVERY_MILLISECONDS);  
+                        } 
+                      });
 }
 
 
-init(function(){
-  console.log('Starting')
-  loopEvery(trap, CHECK_EVERY_MILLISECONDS);  
-});
-
+start();
