@@ -1,0 +1,9 @@
+{
+  "name": "its-a-trap",
+  "version": "0.0.1",
+  "author": "Dan Lash <danlash@gmail.com>",
+  "description": "Halloween... IT'S A TRAP!",
+   "dependencies" : {
+    "gpio"   :  "0.2.x"
+  }
+}
