@@ -23,13 +23,15 @@ function loopEvery(loopFn, timeoutMilliseconds) {
   looper();
 }
 
-function init() {
+function init(done) {
+  console.log('Initializing')
 
-  var gpio11 = gpio.export(11, { direction: 'out' });
+  var gpio11 = gpio.export(11, { direction: 'out', ready: done });
 }
 
 
-console.log('Initializing')
-init();
-console.log('Starting')
-loopEvery(trap, CHECK_EVERY_MILLISECONDS);
+init(function(){
+  console.log('Starting')
+  loopEvery(trap, CHECK_EVERY_MILLISECONDS);  
+});
+
