@@ -19,16 +19,19 @@ function buttonPressed() {
 }
 
 function loopEvery(loopFn, timeoutMilliseconds) {
-  var looper = function() { loopFn(); setTimeout(looper); };
+  var looper = function() { loopFn(); setTimeout(looper, timeoutMilliseconds); };
   looper();
 }
 
 function init() {
+  console.log('Initializing')
+
   var gpio11 = gpio.export(11, { direction: 'out' });
 }
 
 
 init(function(){
-  //main loop
+  console.log('Starting')
+
   loopEvery(trap, timeoutMilliseconds);
 });
