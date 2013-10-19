@@ -32,4 +32,4 @@ function init() {
 console.log('Initializing')
 init();
 console.log('Starting')
-loopEvery(trap, timeoutMilliseconds);
+loopEvery(trap, CHECK_EVERY_MILLISECONDS);
