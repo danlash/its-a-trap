@@ -1,3 +1,5 @@
+return 0;
+
 var CHECK_EVERY_MILLISECONDS = 1000;
 
 var gpio = require('gpio');
