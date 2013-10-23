@@ -1,6 +1,8 @@
-//pin 22 = channel 4
 var gpio = require('gpio');
+
+//pin 22 = channel 4
 var button = gpio.export(22, { direction: 'in' })
-button.on('change', function(){
-  console.log('changed!')
-})
+
+module.exports.change = function(changed) {
+	button.on('change', changed);
+}
