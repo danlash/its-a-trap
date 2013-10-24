@@ -25,22 +25,24 @@ module.exports.prototype.play = function(file, offset, length, done) {
 	length = length || 30;
 
 	var filepath = path.resolve(this._folder, file);
-
+	console.log(filepath, length)
 	var command = 'mplayer';
-	var args = ['-ss', offset, filepath];
+	var args = [filepath, '-ss', offset, '-really-quiet'];
 	var options = { cwd: this._folder };
 
 	this._process = spawn(command, args, options);
 	this._playing = true;
 
 	var self = this;
+	console.log('starting')
 	setTimeout(function(){
 		self.stop();
 		done()
-	}, clip.length * 1000);
+	}, length * 1000);
 };
 
 module.exports.prototype.stop = function() {
+		console.log('stopping')
 	if (this._process) this._process.kill();
 	this._process = null;
 	this._playing = false;
