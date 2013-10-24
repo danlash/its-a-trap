@@ -24,10 +24,11 @@ module.exports.prototype.play = function(file, offset, length, done) {
 	offset = offset || 0;
 	length = length || 30;
 
+	var intro = path.resolve(this._folder, 'ackbar.m4a');
 	var filepath = path.resolve(this._folder, file);
-	console.log(filepath, length)
+	
 	var command = 'mplayer';
-	var args = [filepath, '-ss', offset, '-really-quiet'];
+	var args = [intro, filepath, '-ss', offset, '-really-quiet'];
 	var options = { cwd: this._folder };
 
 	this._process = spawn(command, args, options);
