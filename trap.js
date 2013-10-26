@@ -1,6 +1,6 @@
 var lights = require('./lights');
 var button = require('./button');
-var player = new (require('./player'))('./media');
+var player = new (require('./player'))('/home/pi/its-a-trap/media');
 console.log(lights, button, player)
 
 lights.idle();
@@ -15,4 +15,4 @@ button.change(function(){
 setInterval(function(){
 	if (!player.playing())
 		lights.status(lights.idle);
-}, 10 * 1000);
+}, 60 * 1000);
