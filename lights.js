@@ -94,6 +94,51 @@ function rainbow() {
 	throb(led1.blue, 3);
 }
 
+function allColors(allDone) {
+	reset(led1.all());
+
+	var flashRed = function(done) { flash(led1.red, done); }
+	var flashGreen = function(done) { flash(led1.green, done); }
+	var flashBlue = function(done) { flash(led1.blue, done); }
+	var flashYellow = function(done) { flash(led1.red, done); flash(led1.green); }
+	var flashCyan = function(done) { flash(led1.blue, done); flash(led1.green); }
+	var flashMagenta = function(done) { flash(led1.blue, done); flash(led1.red); }
+	var flashWhite = function(done) { flash(led1.blue, done); flash(led1.green); flash(led1.red); }
+
+	var colors = [flashGreen, flashRed, flashYellow, flashBlue, flashWhite, flashCyan];
+	var i = 0;
+
+	var playNext = function() { 
+		if (i == colors.length) i = 0; 
+		colors[i++](playNext); 
+	}
+
+	playNext();
+}
+
+function strobe(colors) {
+	var intervalHandle = setInterval(function(){
+		colors.forEach(function(color){ set(color, ON); });
+
+		var timeoutHandle = setTimeout(function(){
+			colors.forEach(function(color){ set(color, OFF); });	
+		}, 100)
+
+		colors.forEach(function(color){ color.timeoutHandle = timeoutHandle; });
+
+	}, 200);
+
+	colors.forEach(function(color){ color.intervalHandle = intervalHandle; });
+}
+
+var strobeWhite = function(){ strobe([ led1.red, led1.green, led1.blue ]); };
+var strobeRed = function(){ strobe([ led1.red ]); };
+var strobeGreen = function(){ strobe([ led1.green ]); };
+var strobeBlue = function(){ strobe([ led1.blue ]); };
+var strobeCyan = function(){ strobe([ led1.green, led1.blue ]); };
+var strobeYellow = function(){ strobe([ led1.red, led1.green ]); };
+var strobeMagenta = function(){ strobe([ led1.red, led1.blue ]); };
+
 // ----
 
 function idle() {
@@ -105,7 +150,10 @@ function idle() {
 function play() {
 	console.log('play');
 	reset(led1.all());
-	rainbow();
+	var animations = [rainbow, allColors, 
+			strobeWhite, strobeRed, strobeGreen, strobeBlue, 
+			strobeCyan, strobeYellow, strobeMagenta];
+	animations[Math.floor(Math.random() * animations.length)]();
 }
 
 
