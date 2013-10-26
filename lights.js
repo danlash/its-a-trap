@@ -5,8 +5,8 @@ var Wave = require('./wave');
 var THROB_REPEAT = 100;
 var FLASH_WAIT = 500;
 
-var OFF = 1;
-var ON = 0;
+var OFF = 0;
+var ON = 1;
 
 var led1 = {
 	red: {
