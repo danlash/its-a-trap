@@ -7,9 +7,11 @@ module.exports = function player(folder) {
 };
 
 var clips = [
-	{ file: 'mix.mp3', offset: 28 },
-	{ file: 'mix.mp3', offset: 104, length: 15 },
-	{ file: 'trap.mp3' }
+	{ file: 'slow-down.wav', length: 31 },
+	{ file: 'paper-diamond-1.wav', length: 26 },
+	{ file: 'paper-diamond-2.wav', length: 32 },
+	{ file: 'paper-diamond-3.wav', length: 34 }
+	//{ file: 'mix.mp3', offset: 104, length: 15 },
 ];
 
 module.exports.prototype.playRandom = function(done) {
@@ -24,11 +26,11 @@ module.exports.prototype.play = function(file, offset, length, done) {
 	offset = offset || 0;
 	length = length || 30;
 
-	var intro = path.resolve(this._folder, 'ackbar.m4a');
+	//var intro = path.resolve(this._folder, 'ackbar.m4a');
 	var filepath = path.resolve(this._folder, file);
 	
 	var command = 'mplayer';
-	var args = [intro, filepath, '-ss', offset, '-really-quiet'];
+	var args = [ filepath, '-ss', offset, '-really-quiet' ];
 	var options = { cwd: this._folder };
 
 	this._process = spawn(command, args, options);
